@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import controllers_img from '../../assets/images/controllers.jpg';
 import { Link } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 interface Props{
     title: string;
@@ -75,6 +76,12 @@ const useStyles = makeStyles({
 
 
 export const Home = (props:Props) => {
+
+    const darkTheme = createTheme({
+        palette: {
+          type: 'dark',
+        },
+      });
 
     const classes = useStyles();
 
