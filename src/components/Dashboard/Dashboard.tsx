@@ -14,6 +14,11 @@ import { Drawer as MUIDrawer,
     Typography,
     Divider,
     Button,
+    Dialog, 
+    DialogActions, 
+    DialogContent, 
+    DialogContentText, 
+    DialogTitle,
     CssBaseline
 } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -25,7 +30,7 @@ import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import clsx from 'clsx';
 import { RouteComponentProps, withRouter, Switch, Route } from "react-router-dom";
-import { DataTable } from '../../components';
+import { DataTable, ConsoleForm } from '../../components';
 
 const drawerWidth = 200;
 
@@ -95,7 +100,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     myConsoles: {
         marginLeft: theme.spacing(6),
-        marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(3),
+        marginTop: theme.spacing(5)
     },
   }),
 );
@@ -121,6 +127,7 @@ export const Dashboard = withRouter((props: DashProps) => {
     const theme = useTheme();
     // UseState Hook
     const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     // functions to set the state of 'open'
     const handleDrawerOpen = () => {
@@ -128,6 +135,14 @@ export const Dashboard = withRouter((props: DashProps) => {
     };
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    // functions to set the state of 'dialogOpen'
+    const handleDialogClickOpen = () => {
+      setDialogOpen(true);
+    };
+    const handleDialogClickClose = () => {
+      setDialogOpen(false);
     };
 
     // organization - keeping a few items for later
@@ -166,7 +181,20 @@ export const Dashboard = withRouter((props: DashProps) => {
                     <Typography variant="h5" noWrap>
                         Dashboard
                     </Typography>
-                    <Button className={classes.toolbar_button}><AddBoxRoundedIcon /> &nbsp; New Console</Button>
+                    <Button className={classes.toolbar_button} onClick={handleDialogClickOpen}><AddBoxRoundedIcon /> &nbsp; New Console</Button>
+
+                    {/*Dialog Pop Up begin */}
+                    <Dialog open={dialogOpen} onClose={handleDialogClickClose} aria-labelledby="form-dialog-title">
+                      <DialogTitle id="form-dialog-title">Add New Console</DialogTitle>
+                      <DialogContent>
+                          <ConsoleForm />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick = {handleDialogClickClose} color="secondary">Cancel</Button>
+                        <Button onClick={handleDialogClickClose}>Done</Button> 
+                      </DialogActions>
+                    </Dialog>
+
                 </Toolbar>
             </AppBar>
             <MUIDrawer
