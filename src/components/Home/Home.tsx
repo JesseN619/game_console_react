@@ -126,7 +126,7 @@ export const Home = (props:Props) => {
                 <div className={classes.main_text}>
                     <h1>{ props.title }</h1>
                     <p>Share your collection with other enthusiasts</p>
-                    <Button size='large' variant="contained">Click Me</Button>
+                    {/* <Button size='large' variant="contained">Click Me</Button> */}
                 </div>
             </main>
         </div>
