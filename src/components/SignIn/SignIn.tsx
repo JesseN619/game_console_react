@@ -23,6 +23,7 @@ const useStyles = makeStyles({
         width: '240px',
         border: 'none',
         textAlign: 'center',
+        margin: 'auto',
         boxShadow: 'rgb(0 0 0 / 25%) 0px 2px 4px 0px',
         fontSize: '16px',
         lineHeight: '48px',
@@ -42,7 +43,11 @@ const useStyles = makeStyles({
         fontSize: '2em'
     },
     containerStyle: {
-        marginTop: '2em'
+        marginTop: '2em',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center'
     },
     snackBar: {
         color: 'white',
@@ -92,8 +97,8 @@ export const SignIn = withRouter( (props:SignInProps) => {
     return (
         <div>
             <Container maxWidth = 'sm' className={classes.containerStyle}>
-                <Typography className={classes.typographyStyle}>Sign In Below</Typography>
-                <form>
+                <Typography className={classes.typographyStyle}>Sign In</Typography>
+                {/* <form>
                 <div>
                     <label htmlFor="email">Email</label>
                     <Input  name="email" placeholder='Place Email Here' />
@@ -102,9 +107,8 @@ export const SignIn = withRouter( (props:SignInProps) => {
                     <label htmlFor="password">Password</label>
                     <Input name="password" placeholder='Place Password Here' />
                 </div>
-                {/* walkthrough doesn't have onclick */}
                 <Button type='submit' variant='contained' color='primary' onClick={sign_in}>Submit</Button>
-                </form>
+                </form> */}
                 
                 <AuthCheck fallback={
                     <Button className={classes.googleButton} onClick={sign_in}>Sign In With Google</Button>
@@ -112,7 +116,6 @@ export const SignIn = withRouter( (props:SignInProps) => {
                     <Button variant='contained' color='secondary' onClick={sign_out}>Sign Out</Button>
                 </AuthCheck>
                 <Snackbar message={'Success'} open={open} autoHideDuration={6000} onClose={handleSnackClose}>
-                    {/* Nate put curly braces around "success" */}
                     <Alert onClose={handleSnackClose} severity="success">
                         Successful Sign In - Redirect in 6 secs
                     </Alert>
